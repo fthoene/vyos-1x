@@ -80,6 +80,48 @@
      X-Splunk-Request-Channel = "{{ splunk.authentication.token }}"
 ### End Splunk ###
 {% endif %}
+{% if loki is vyos_defined %}
+### Loki ###
+[[outputs.loki]]
+  ## The domain of Loki
+  domain = "{{ loki.domain }}"
+{%     if loki.endpoint is vyos_defined %}
+  ## Endpoint to write api
+  endpoint = "{{ loki.endpoint }}"
+{%     endif %}
+{%     if loki.timeout is vyos_defined %}
+  ## Connection timeout
+  timeout = "{{ loki.timeout }}"
+{%     endif %}
+{%     if loki.authentication.username is vyos_defined and loki.authentication.password is vyos_defined %}
+  ## Basic auth credential
+  username = "{{ loki.authentication.username }}"
+  password = "{{ loki.authentication.password }}"
+{%     endif %}
+{%     if loki.http_headers is vyos_defined %}
+  ## Additional HTTP headers
+  http_headers = {{ loki.http_headers }}
+{%     endif %}
+{%     if loki.gzip_request is vyos_defined %}
+  ## If the request must be gzip encoded
+  gzip_request = {{ loki.gzip_request }}
+{%     endif %}
+{%     if loki.tls.ca is vyos_defined %}
+  ## Optional TLS Config
+  tls_ca = "{{ loki.tls.ca }}"
+{%     endif %}
+{%     if loki.tls.cert is vyos_defined %}
+  tls_cert = "{{ loki.tls.cert }}"
+{%     endif %}
+{%     if loki.tls.key is vyos_defined %}
+  tls_key = "{{ loki.tls.key }}"
+{%     endif %}
+{%     if loki.metric_name_label is vyos_defined %}
+  ## Metric Name Label
+  metric_name_label = "{{ loki.metric_name_label }}"
+{%     endif %}
+### End Loki ###
+{% endif %}
 [[inputs.cpu]]
     percpu = true
     totalcpu = true
