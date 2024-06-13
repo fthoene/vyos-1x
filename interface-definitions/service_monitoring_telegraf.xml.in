@@ -274,6 +274,90 @@
                   #include <include/url-http-https.xml.i>
                 </children>
               </node>
+              <node name="loki">
+                <properties>
+                  <help>Output plugin Loki</help>
+                </properties>
+                <children>
+                  <leafNode name="domain">
+                    <properties>
+                      <help>The domain of Loki</help>
+                    </properties>
+                  </leafNode>
+                  <leafNode name="endpoint">
+                    <properties>
+                      <help>Endpoint to write api</help>
+                      <defaultValue>/loki/api/v1/push</defaultValue>
+                    </properties>
+                  </leafNode>
+                  <leafNode name="timeout">
+                    <properties>
+                      <help>Connection timeout</help>
+                      <defaultValue>5s</defaultValue>
+                    </properties>
+                  </leafNode>
+                  <node name="authentication">
+                    <properties>
+                      <help>Basic auth credential</help>
+                    </properties>
+                    <children>
+                      <leafNode name="username">
+                        <properties>
+                          <help>Authentication username</help>
+                        </properties>
+                      </leafNode>
+                      <leafNode name="password">
+                        <properties>
+                          <help>Authentication password</help>
+                          <valueHelp>
+                            <format>txt</format>
+                            <description>Authentication password</description>
+                          </valueHelp>
+                        </properties>
+                      </leafNode>
+                    </children>
+                  </node>
+                  <leafNode name="http-headers">
+                    <properties>
+                      <help>Additional HTTP headers</help>
+                      <multi/>
+                    </properties>
+                  </leafNode>
+                  <leafNode name="gzip-request">
+                    <properties>
+                      <help>If the request must be gzip encoded</help>
+                      <defaultValue>false</defaultValue>
+                    </properties>
+                  </leafNode>
+                  <node name="tls">
+                    <properties>
+                      <help>Optional TLS Config</help>
+                    </properties>
+                    <children>
+                      <leafNode name="ca">
+                        <properties>
+                          <help>CA certificate file</help>
+                        </properties>
+                      </leafNode>
+                      <leafNode name="cert">
+                        <properties>
+                          <help>Certificate file</help>
+                        </properties>
+                      </leafNode>
+                      <leafNode name="key">
+                        <properties>
+                          <help>Key file</help>
+                        </properties>
+                      </leafNode>
+                    </children>
+                  </node>
+                  <leafNode name="metric-name-label">
+                    <properties>
+                      <help>Label to use for the metric name</help>
+                    </properties>
+                  </leafNode>
+                </children>
+              </node>
               #include <include/interface/vrf.xml.i>
             </children>
           </node>
