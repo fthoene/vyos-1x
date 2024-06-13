@@ -113,6 +113,9 @@ def get_config(config=None):
     if not conf.exists(base + ['azure-data-explorer']):
         del monitoring['azure_data_explorer']
 
+    if not conf.exists(base + ['loki']):
+        del monitoring['loki']
+
     return monitoring
 
 def verify(monitoring):
@@ -158,6 +161,11 @@ def verify(monitoring):
 
         if 'url' not in monitoring['splunk']:
             raise ConfigError(f'Monitoring splunk "url" is mandatory!')
+
+    # Verify Loki
+    if 'loki' in monitoring:
+        if 'url' not in monitoring['loki']:
+            raise ConfigError(f'Monitoring loki "url" is mandatory!')
 
     return None
 
